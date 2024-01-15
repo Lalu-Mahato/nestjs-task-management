@@ -7,12 +7,14 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Put,
 } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { Task } from './entities/task.entity';
 import { ApiResponse } from '../common/common.types';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskStatusDto } from './dto/update-task-status.dto';
+import { UpdateTaskDto } from './dto/update-task.dto';
 
 @Controller('tasks')
 export class TasksController {
@@ -40,11 +42,19 @@ export class TasksController {
     return this.tasksService.deleteTaskById(id);
   }
 
-  @Patch('/:id/status')
+  @Patch(':id/status')
   updateTaskStatus(
     @Body() updateTaskStatusDto: UpdateTaskStatusDto,
     @Param('id', ParseIntPipe) id: number,
   ): Promise<any> {
     return this.tasksService.updateTaskStatus(id, updateTaskStatusDto);
+  }
+
+  @Put(':id')
+  updateTask(
+    @Body() updateTaskDto: UpdateTaskDto,
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<any> {
+    return this.tasksService.updateTask(id, updateTaskDto);
   }
 }
