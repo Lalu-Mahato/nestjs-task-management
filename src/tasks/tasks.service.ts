@@ -7,11 +7,7 @@ import {
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Task } from './entities/task.entity';
-import {
-  ApiResponse,
-  successResponse,
-  createdResponse,
-} from '../common/common.types';
+import { ApiResponse } from '../common/common.types';
 import { CommonFunctionsService } from '../common/common-functions.service';
 import { TASK_NOT_FOUND } from '../constants/error-messages.constants';
 import { CreateTaskDto } from './dto/create-task.dto';
@@ -30,14 +26,14 @@ export class TasksService {
     const tasks = await this.tasksRepository.find({
       order: { updatedAt: 'DESC' },
     });
-    return successResponse(tasks);
+    return this.commonFunctionsService.successResponse(tasks);
   }
 
   async createTask(createTaskDto: CreateTaskDto): Promise<ApiResponse<Task>> {
     const id = this.commonFunctionsService.generateUniqueIntegerId();
     const newTask = this.tasksRepository.create({ ...createTaskDto, id });
     const savedTask = await this.tasksRepository.save(newTask);
-    return createdResponse(savedTask);
+    return this.commonFunctionsService.createdResponse(savedTask);
   }
 
   async getTaskById(id: number): Promise<ApiResponse<Task>> {
@@ -45,7 +41,7 @@ export class TasksService {
     if (!task) {
       throw new NotFoundException(TASK_NOT_FOUND);
     }
-    return successResponse(task);
+    return this.commonFunctionsService.successResponse(task);
   }
 
   async deleteTaskById(id: number): Promise<ApiResponse<Task>> {
@@ -62,7 +58,7 @@ export class TasksService {
     const { data } = await this.getTaskById(id);
     data.status = status;
     const updatedTask = await this.tasksRepository.save(data);
-    return successResponse(updatedTask);
+    return this.commonFunctionsService.successResponse(updatedTask);
   }
 
   async updateTask(id: number, updateTaskDto: UpdateTaskDto): Promise<any> {
@@ -71,6 +67,6 @@ export class TasksService {
       data[key] = updateTaskDto[key];
     });
     const savedTask = await this.tasksRepository.save(data);
-    return successResponse(savedTask);
+    return this.commonFunctionsService.successResponse(savedTask);
   }
 }
