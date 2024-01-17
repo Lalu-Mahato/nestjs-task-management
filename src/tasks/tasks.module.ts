@@ -5,10 +5,11 @@ import { TasksService } from './tasks.service';
 import { Task } from './entities/task.entity';
 import { CommonFunctionsService } from 'src/common/common-functions.service';
 import { AuthModule } from 'src/auth/auth.module';
+import { LoggerModule } from 'src/common/logger/logger.module';
 
 @Module({
   controllers: [TasksController],
   providers: [TasksService, CommonFunctionsService],
-  imports: [TypeOrmModule.forFeature([Task]), AuthModule],
+  imports: [TypeOrmModule.forFeature([Task]), AuthModule, LoggerModule],
 })
 export class TasksModule {}

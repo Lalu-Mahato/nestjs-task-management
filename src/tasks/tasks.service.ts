@@ -14,6 +14,7 @@ import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskStatusDto } from './dto/update-task-status.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { User } from 'src/auth/entities/user.entity';
+import { LoggerService } from 'src/common/logger/logger.service';
 
 @Injectable()
 export class TasksService {
@@ -21,6 +22,7 @@ export class TasksService {
     @InjectRepository(Task)
     private tasksRepository: Repository<Task>,
     private commonFunctionsService: CommonFunctionsService,
+    private loggerService: LoggerService,
   ) {}
 
   async getAllTasks(user: User): Promise<ApiResponse<Task[]>> {
@@ -38,6 +40,7 @@ export class TasksService {
     const id = this.commonFunctionsService.generateUniqueIntegerId();
     const newTask = this.tasksRepository.create({ ...createTaskDto, id, user });
     const savedTask = await this.tasksRepository.save(newTask);
+    this.loggerService.log('New task created!');
     return this.commonFunctionsService.createdResponse(savedTask);
   }
 
