@@ -3,9 +3,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TasksController } from './tasks.controller';
 import { TasksService } from './tasks.service';
 import { Task } from './entities/task.entity';
-import { CommonFunctionsService } from 'src/common/common-functions.service';
-import { AuthModule } from 'src/auth/auth.module';
-import { LoggerModule } from 'src/common/logger/logger.module';
+import { CommonFunctionsService } from '../common/common-functions.service';
+import { AuthModule } from '../auth/auth.module';
+import { LoggerModule } from '../common/logger/logger.module';
 
 @Module({
   controllers: [TasksController],

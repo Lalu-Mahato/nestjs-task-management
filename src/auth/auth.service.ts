@@ -11,7 +11,7 @@ import { CommonFunctionsService } from '../common/common-functions.service';
 import { RegisterUserDto } from './dto/register-user.dto';
 import { LoginDto } from './dto/login.dto';
 import { JwtService } from '@nestjs/jwt';
-import { ApiResponse, LoginResponse } from 'src/common/common.types';
+import { ApiResponse, LoginResponse } from '../common/common.types';
 import { INVALID_LOGIN_CREDENTIAL, USERNAME_ALREADY_TAKEN } from './constants';
 
 @Injectable()

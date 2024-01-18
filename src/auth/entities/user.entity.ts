@@ -1,5 +1,5 @@
-import { BaseEntity } from 'src/base.entity';
-import { Task } from 'src/tasks/entities/task.entity';
+import { BaseEntity } from '../../base.entity';
+import { Task } from '../../tasks/entities/task.entity';
 import { Entity, Column, OneToMany } from 'typeorm';
 
 @Entity({ name: 'users' })

@@ -2,7 +2,7 @@ import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterUserDto } from './dto/register-user.dto';
 import { LoginDto } from './dto/login.dto';
-import { ApiResponse, LoginResponse } from 'src/common/common.types';
+import { ApiResponse, LoginResponse } from '../common/common.types';
 import { User } from './entities/user.entity';
 
 @Controller('auth')

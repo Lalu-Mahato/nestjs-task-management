@@ -13,8 +13,8 @@ import { TASK_NOT_FOUND } from '../constants/error-messages.constants';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskStatusDto } from './dto/update-task-status.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
-import { User } from 'src/auth/entities/user.entity';
-import { LoggerService } from 'src/common/logger/logger.service';
+import { User } from '../auth/entities/user.entity';
+import { LoggerService } from '../common/logger/logger.service';
 
 @Injectable()
 export class TasksService {
